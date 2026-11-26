@@ -5,9 +5,9 @@ export const isLang = (v: string): v is Lang => (LOCALES as readonly string[]).i
 export const SITE = {
   name: 'State Dispatchers',
   url: (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.statedispatchers.com').replace(/\/$/, ''),
-  phone: '+18005550123', // TODO: real number
-  phoneDisplay: '(800) 555-0123',
-  email: 'dispatch@statedispatchers.com', // TODO: real email
+  phone: '+14156058130',
+  phoneDisplay: '(415) 605-8130',
+  email: 'statedispatchers@gmail.com',
   mc: 'MC 000000', // TODO: real MC number
   pricing: { percent: 6, weekly: 145, featured: 'percent' as 'percent' | 'weekly' | 'custom' },
 };
