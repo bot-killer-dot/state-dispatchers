@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { SITE, href, type Lang } from '@/lib/site';
 import { nav } from '@/lib/content';
+import { legalLabels } from '@/lib/legal';
 
 export function Footer({ lang, tagline, hours }: { lang: Lang; tagline: string; hours?: string }) {
   return (
@@ -18,7 +19,12 @@ export function Footer({ lang, tagline, hours }: { lang: Lang; tagline: string; 
           <div className="stack-sm">
             <a className="ftr__phone" href={'tel:' + SITE.phone}>{SITE.phoneDisplay}</a>
             {hours ? <span>{hours}</span> : null}
-            <span>© {new Date().getFullYear()} State Dispatchers · {SITE.mc}</span>
+            <a href={'mailto:' + SITE.email}>{SITE.email}</a>
+            <span className="ftr__legal">
+              <Link href={href(lang, '/terms')}>{legalLabels[lang].terms}</Link>
+              <Link href={href(lang, '/privacy')}>{legalLabels[lang].privacy}</Link>
+            </span>
+            <span>© {new Date().getFullYear()} State Dispatchers LLC · {SITE.mc}</span>
           </div>
         </div>
       </footer>

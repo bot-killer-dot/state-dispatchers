@@ -1,13 +1,16 @@
 'use client';
 import { useState, type FormEvent } from 'react';
 import { Send } from 'lucide-react';
-import type { Lang } from '@/lib/site';
+import Link from 'next/link';
+import { href, type Lang } from '@/lib/site';
 import { contact } from '@/lib/content';
+import { smsConsent } from '@/lib/legal';
 
 type Errs = { name?: boolean; email?: boolean; phone?: boolean };
 
 export function ContactForm({ lang }: { lang: Lang }) {
   const t = contact[lang];
+  const sms = smsConsent[lang];
   const [errs, setErrs] = useState<Errs>({});
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
@@ -19,7 +22,7 @@ export function ContactForm({ lang }: { lang: Lang }) {
     setErrs(next);
     if (next.name || next.email || next.phone) return;
     setStatus('sending');
-    const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: v('name'), email: v('email'), phone: v('phone'), note: v('note'), consent: fd.get('consent') === 'on', lang }) });
+    const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: v('name'), email: v('email'), phone: v('phone'), note: v('note'), smsCare: fd.get('smsCare') === 'on', smsMarketing: fd.get('smsMarketing') === 'on', consentText: { care: sms.care, marketing: sms.marketing, disclosure: sms.disclosure }, page: window.location.pathname, lang }) });
     setStatus(res.ok ? 'sent' : 'error');
   }
 
@@ -51,7 +54,13 @@ export function ContactForm({ lang }: { lang: Lang }) {
         <label htmlFor="f-note">{t.msg} <span className="opt">{t.optional}</span></label>
         <textarea id="f-note" name="note" rows={3} placeholder={t.msgPh} />
       </div>
-      <label className="consent"><input type="checkbox" name="consent" defaultChecked /><span>{t.consent}</span></label>
+      <div className="sms-consent">
+        <label className="consent"><input type="checkbox" name="smsCare" /><span>{sms.care}</span></label>
+        <label className="consent"><input type="checkbox" name="smsMarketing" /><span>{sms.marketing}</span></label>
+        <p className="sms-consent__note">
+          {sms.disclosure} <Link href={href(lang, '/terms')}>{sms.terms}</Link> {sms.and} <Link href={href(lang, '/privacy')}>{sms.privacy}</Link>.
+        </p>
+      </div>
       <button type="submit" className="btn btn--primary btn--block" disabled={status === 'sending'}><Send size={22} aria-hidden />{t.send}</button>
       {status === 'error' ? <p className="field__err" role="alert">Something went wrong. Please call us instead.</p> : null}
     </form>

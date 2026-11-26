@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server';
 
-type Body = { name?: string; email?: string; phone?: string; note?: string; consent?: boolean; lang?: string };
+type Body = {
+  name?: string; email?: string; phone?: string; note?: string; lang?: string; page?: string;
+  smsCare?: boolean; smsMarketing?: boolean;
+  consentText?: { care?: string; marketing?: string; disclosure?: string };
+};
 
 export async function POST(req: Request) {
   let b: Body;
@@ -11,7 +15,17 @@ export async function POST(req: Request) {
   if (!name || !/^\S+@\S+\.\S+$/.test(email) || phone.replace(/\D/g, '').length < 10) {
     return NextResponse.json({ ok: false, error: 'invalid' }, { status: 422 });
   }
-  const lead = { name, email, phone, note: (b.note || '').slice(0, 2000), consent: !!b.consent, lang: b.lang === 'es' ? 'es' : 'en', at: new Date().toISOString() };
+  const at = new Date().toISOString();
+  // SMS opt-in record (10DLC): keep what the person agreed to, when, where, and the exact wording shown.
+  const sms = {
+    care: b.smsCare === true,
+    marketing: b.smsMarketing === true,
+    at,
+    source: 'website form ' + String(b.page || '/contact').slice(0, 100),
+    ip: (req.headers.get('x-forwarded-for') || '').split(',')[0].trim(),
+    text: b.consentText ? { care: String(b.consentText.care || '').slice(0, 600), marketing: String(b.consentText.marketing || '').slice(0, 600), disclosure: String(b.consentText.disclosure || '').slice(0, 600) } : undefined,
+  };
+  const lead = { name, email, phone, note: (b.note || '').slice(0, 2000), sms, lang: b.lang === 'es' ? 'es' : 'en', at };
   // TODO: deliver the lead — e.g. send an email (Resend/SendGrid), post to your CRM, or a Slack webhook.
   console.log('[lead]', lead);
   return NextResponse.json({ ok: true });

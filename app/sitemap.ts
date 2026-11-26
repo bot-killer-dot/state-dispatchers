@@ -3,7 +3,7 @@ import { absolute, href, LOCALES } from '@/lib/site';
 import { equipment } from '@/lib/content';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = ['/', '/about', '/contact', ...equipment.map((e) => '/trucks/' + e.slug)];
+  const paths = ['/', '/about', '/contact', '/terms', '/privacy', ...equipment.map((e) => '/trucks/' + e.slug)];
   const now = new Date();
   return paths.flatMap((p) => LOCALES.map((lang) => ({
     url: absolute(href(lang, p)),
