@@ -38,6 +38,11 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel@50.44.0
 
+      - name: Show which Vercel account the token can use
+        run: |
+          echo "Account:"; vercel whoami --token=${{ secrets.VERCEL_TOKEN }} || true
+          echo "Teams:"; vercel teams ls --token=${{ secrets.VERCEL_TOKEN }} || true
+
       - name: Pull Vercel project settings
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
