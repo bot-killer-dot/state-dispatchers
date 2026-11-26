@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, CalendarCheck, Receipt, Truck } from 'lucide-react';
 import { SITE, absolute, href, type Lang } from '@/lib/site';
@@ -27,8 +28,7 @@ export function AboutPage({ lang }: { lang: Lang }) {
           <p className="lead">{t.lead}</p>
         </section>
 
-        {/* TODO: add a real team photo at /public/images/about-team.jpg and swap this block for <Image fill /> */}
-        <div className="container"><div className="photo-wide"><div className="photo-missing">Team photo — your dispatchers at their desks</div></div></div>
+        <div className="container"><div className="photo-wide"><Image src="/images/about-team.jpg" alt={lang === 'es' ? 'Despachadores con audífonos trabajando en sus escritorios' : 'Dispatchers with headsets working at their desks'} fill sizes="(min-width: 1200px) 1200px, 100vw" /></div></div>
 
         <section className="container section split" aria-labelledby="why">
           <h2 id="why" className="h2">{t.whyTitle}</h2>

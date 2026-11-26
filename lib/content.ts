@@ -1115,7 +1115,7 @@ export const equipment = [
     "photos": [
       "/images/equipment/hotshot-hero.png",
       "/images/equipment/hotshot-1.png",
-      null
+      "/images/equipment/hotshot-2.jpg"
     ]
   },
   {
@@ -1203,9 +1203,9 @@ export const equipment = [
       "es": "Solo tractor"
     },
     "photos": [
-      null,
-      null,
-      null
+      "/images/equipment/power-only-hero.jpg",
+      "/images/equipment/power-only-1.jpg",
+      "/images/equipment/power-only-2.jpg"
     ]
   },
   {
@@ -1294,8 +1294,8 @@ export const equipment = [
     },
     "photos": [
       "/images/equipment/auto-carrier-hero.png",
-      "/images/equipment/auto-carrier-1.png",
-      "/images/equipment/auto-carrier-2.png"
+      "/images/equipment/auto-carrier-1.jpg",
+      "/images/equipment/auto-carrier-2.jpg"
     ]
   }
 ] as Equipment[];

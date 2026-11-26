@@ -32,11 +32,8 @@ Deploys as-is to Vercel (or any Node host). All pages are statically generated.
 - FAQ uses native `<details>` so answers are in the HTML and work without JS
 
 ## Before launch — replace placeholders
-- `lib/site.ts`: phone, email, MC number, domain
+- `lib/site.ts`: MC number
 - Booked-load card numbers (`components/LoadCard.tsx`) — use a real load
 - Testimonials (`lib/content.ts` q1–q3) — the driver photos are AI-generated; use real customers or remove "verified" claims
-- Missing photos: `/public/images/equipment/power-only-{hero,1,2}.png`, `hotshot-2.png` (pages show a neutral block until added; then set `photos` in `lib/content.ts`)
-- About page team photo
-- Auto-carrier photos 1 & 2 contain visible third-party brand names — regenerate
 - Add a favicon/logo at `app/icon.png` once a logo exists
 - Convert PNGs in `/public/images` to JPG/WebP for smaller repo size (next/image already serves optimized formats)
