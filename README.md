@@ -17,7 +17,7 @@ Deploys as-is to Vercel (or any Node host). All pages are statically generated.
 - `views/` — page bodies shared by both languages (Home, Truck, About, Contact, Shell)
 - `components/` — Header (menu + EN/ES), HeroSlider, LoadCard, TruckGrid, Faq (native `<details>`), ContactForm, CallBar, Footer…
 - `lib/content.ts` — **all copy** (EN + ES) and truck data. Edit text here.
-- `lib/site.ts` — phone, email, MC #, pricing (6% / $145), site URL
+- `lib/site.ts` — phone, email, pricing (6% / $145), site URL
 - `lib/seo.ts` — metadata + JSON-LD builders
 - `app/globals.css` — design tokens + all styles (Hi-Vis system, 960px breakpoint)
 - `app/api/contact/route.ts` — form endpoint (validates; **TODO** wire to email/CRM)
@@ -32,7 +32,6 @@ Deploys as-is to Vercel (or any Node host). All pages are statically generated.
 - FAQ uses native `<details>` so answers are in the HTML and work without JS
 
 ## Before launch — replace placeholders
-- `lib/site.ts`: MC number
 - Booked-load card numbers (`components/LoadCard.tsx`) — use a real load
 - Testimonials (`lib/content.ts` q1–q3) — the driver photos are AI-generated; use real customers or remove "verified" claims
 - Add a favicon/logo at `app/icon.png` once a logo exists

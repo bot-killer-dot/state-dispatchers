@@ -24,7 +24,7 @@ export function Footer({ lang, tagline, hours }: { lang: Lang; tagline: string; 
               <Link href={href(lang, '/terms')}>{legalLabels[lang].terms}</Link>
               <Link href={href(lang, '/privacy')}>{legalLabels[lang].privacy}</Link>
             </span>
-            <span>© {new Date().getFullYear()} State Dispatchers LLC · {SITE.mc}</span>
+            <span>© {new Date().getFullYear()} State Dispatchers LLC</span>
           </div>
         </div>
       </footer>

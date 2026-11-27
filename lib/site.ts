@@ -8,7 +8,6 @@ export const SITE = {
   phone: '+14156058130',
   phoneDisplay: '(415) 605-8130',
   email: 'statedispatchers@gmail.com',
-  mc: 'MC 000000', // TODO: real MC number
   pricing: { percent: 6, weekly: 145, featured: 'percent' as 'percent' | 'weekly' | 'custom' },
 };
 
